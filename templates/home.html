@@ -4,12 +4,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Nocturn: Crypto Wallet</title>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+    </style>
     <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
 </head>
 
-<body>
-    <h1>Nocturn: Crypto Wallet</h1>
+<body class="bg-zinc-700 min-h-screen flex justify-center items-start">
+    <!-- Main container that centers the mobile view -->
+    <div class="w-full max-w-[420px] min-h-screen bg-white relative">
+        <!-- Main content area with purple gradient -->
+        <div class="relative bg-[#AB9DFF] border-transperent rounded-b-[60px] ">
+            <!-- Top header -->
+            <div
+                class="flex justify-between items-center mb-8 bg-[#1C1E32] p-8 pb-5  border-transperent rounded-b-[36px]">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
+                        <div
+                            class="w-full h-full flex items-center justify-center text-center bg-zinc-200 text-2xl font-bold">
+                            <span class="text-center text-black">J</span>
+                        </div>
+                    </div>
+                    <span class="text-white font-semibold text-xl">Hello, Jenny!</span>
+                </div>
+                <button class="text-white p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Balance section -->
+            <div class="mb-8 p-12 flex flex-col items-center">
+                <p class="text-black text-md mb-2">Balance in USD</p>
+                <h1 class="text-black text-6xl font-semibold mb-2">$746.95</h1>
+                <div class="inline-flex items-center bg-black/80 backdrop-blur rounded-full px-4 py-2">
+                    <span class="text-white text-sm">↑ $242.54 (2.93%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Crypto actives section -->
+        <div class="p-6 bg-white rounded-t-3xl -mt-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-semibold">Crypto actives</h2>
+                <button class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Crypto list -->
+            <div class="space-y-4 overflow-y-scroll max-h-[240px]">
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                            <span class="text-orange-600 font-bold">₿</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">BTC</p>
+                            <p class="text-sm text-gray-500">Bitcoin</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">0.01912343</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span class="text-gray-600 font-bold">Ł</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">LTC</p>
+                            <p class="text-sm text-gray-500">Litecoin</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">20,000.85</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
+                            <span class="text-orange-600 font-bold">₿</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">BTC</p>
+                            <p class="text-sm text-gray-500">Bitcoin</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">0.01912343</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span class="text-gray-600 font-bold">Ł</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">LTC</p>
+                            <p class="text-sm text-gray-500">Litecoin</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">20,000.85</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                            <span class="text-gray-600 font-bold">Ł</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">LTC</p>
+                            <p class="text-sm text-gray-500">Litecoin</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">20,000.85</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-[#F2F2F4]  rounded-2xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                            <span class="text-red-600 font-bold">T</span>
+                        </div>
+                        <div>
+                            <p class="font-medium">TRX</p>
+                            <p class="text-sm text-gray-500">Tron</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-medium">1,580.8565</p>
+                        <p class="text-sm text-gray-500">$10,234.23</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Bottom navigation -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-[420px] mx-auto bg-white border-t border-gray-100 px-6 py-4">
+            <div class="flex items-center justify-between p-3 bg-[#1C1E32] border-transperent rounded-[36px]">
+                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
+                        stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4l16 8-16 8 4-8-4-8z" />
+                    </svg>
+
+                </button>
+                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
+                        stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 4L4 12l16 8-4-8 4-8z" />
+                    </svg>
+                </button>
+                <button class="px-4 py-2 bg-white text-black rounded-full text-2xl">
+                    Wallet
+                </button>
+                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
+                        stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
