@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturn</title>
+    <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
+</head>
+<body class="bg-[#1a1b1c] h-screen flex justify-center items-center p-0 md:py-4">
+    <div class="landing p-5 text-center w-full max-w-[420px] bg-[#bbafff] rounded-xl flex flex-col justify-center items-center gap-3 transition-all shadow-lg shadow-[#383b3c]">
+        <div class="mx-auto py-12 px-6 flex flex-col justify-center gap-3">
+            <img class="max-w-64 self-center" src="{{ url_for('static', filename='assets/nocturn-main-black.png') }}" alt="">
+            <p class="text-lg">To get started, create a new wallet or import an existing one.</p>
+        </div>
+        <div class="flex flex-col gap-1 w-full">
+            <button class="spinnable-button create border-2 flex justify-center border-[#1a1b1c] font-semibold bg-[#1a1b1c] w-full text-white p-2 rounded-lg hover:bg-[#282b2c] hover:border-[#282b2c] hover:shadow transition-all">Create Wallet</button>
+            <button class="spinnable-button spinnable-black import border-2 flex justify-center border-[#1a1b1c] font-semibold w-full p-2 rounded-lg hover:bg-[#cdc3ff] hover:border-[#282b2c] hover:shadow transition-all">Import Wallet</button>
+        </div>
+    </div>
+    <div class="create-wallet p-5 w-full max-w-[420px] bg-[#bbafff] rounded-xl hidden flex-col justify-center gap-4 transition-all shadow-lg shadow-[#383b3c]">
+        <div class="font-semibold text-4xl">Wallet Created!</div>
+        <div class="flex flex-col gap-2">
+            <div class="text-2xl font-semibold">Recovery Phrase</div>
+            <div class="bg-[#1a1b1c] rounded-lg">
+                <div class="seed-phrase rounded-lg px-5 py-3 text-white font-mono text-lg">car drive swim print car drive swim print car drive swim print</div>
+                <button class="copy-seed-phrase w-full py-3 flex justify-center items-center gap-2 text-[#7b7e83] border-t-2 border-[#4a4c4f] hover:bg-[#282b2c] hover:border-[#282b2c] rounded-br-lg rounded-bl-lg transition-all" onclick="copySeedPhrase()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.333 6h-6C6.597 6 6 6.597 6 7.333v6c0 .737.597 1.334 1.333 1.334h6c.737 0 1.334-.597 1.334-1.334v-6c0-.736-.597-1.333-1.334-1.333Z" stroke="#7b7e83" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3.333 10h-.666a1.333 1.333 0 0 1-1.334-1.333v-6a1.333 1.333 0 0 1 1.334-1.334h6A1.333 1.333 0 0 1 10 2.667v.666" stroke="#7b7e83" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    Copy
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col gap-2">
+            <div class="text-2xl font-semibold">Save your recovery phrase</div>
+            <div class="text-md">Your recovery phrase is the only way to access your wallet. Write it down and store it in a safe place.</div>
+            <div class="text-md">If you lose your recovery phrase, you will lose access to your wallet and funds.</div>
+        </div>
+        <button class="spinnable-button saved-seed border-2 flex justify-center border-[#1a1b1c] font-semibold bg-[#1a1b1c] w-full text-white p-2 rounded-lg hover:bg-[#282b2c] hover:border-[#282b2c] hover:shadow transition-all">I've saved my recovery phrase</button>
+    </div>
+    <div class="import-wallet p-5 w-full max-w-[420px] bg-[#bbafff] rounded-xl hidden flex-col justify-center gap-4 transition-all shadow-lg shadow-[#383b3c]">
+        <div class="font-semibold text-4xl">Import Wallet</div>
+        <div class="flex flex-col gap-2">
+            <div class="text-2xl font-semibold"></div>
+            <div class="text-md">Import your existing wallet using a seed phrase or a private key.</div>
+        </div>
+        <textarea id="seed-phrase" class="bg-[#1a1b1c] rounded-lg p-3 text-white font-mono text-lg border-4 border-[#1a1b1c] outline-none" rows="3" placeholder="Recovery phrase or private key"></textarea>
+        <button class="spinnable-button final-import border-2 flex justify-center border-[#1a1b1c] font-semibold bg-[#1a1b1c] w-full text-white p-2 rounded-lg hover:bg-[#282b2c] hover:border-[#282b2c] hover:shadow transition-all" disabled>Import Wallet</button>
+    </div>
+    <script src="{{ url_for('static', filename='onboarding.js') }}"></script>
+</body>
+</html>
