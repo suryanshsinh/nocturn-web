@@ -1,9 +1,40 @@
+const navMappings = {
+    "send": ["send", "send/detail", "send/confirmation"],
+    "receive": ["receive", "receive-detail"],
+    "history": ["history", "history-detail"],
+    "settings": ["settings", "settings/profile"]
+};
+
+const addNavigation = (currentPath) => {
+    const navButtons = document.querySelectorAll(".fixed button");
+
+    navButtons.forEach(button => {
+        const buttonUrl = button.getAttribute("data-url");
+
+        let isActive = false;
+
+        if (currentPath === "" && buttonUrl === "") {
+            isActive = true;
+        } else {
+            isActive = Object.keys(navMappings).some(key =>
+                buttonUrl === key && navMappings[key].some(path => currentPath.startsWith(path))
+            );
+        }
+
+        if (isActive) {
+            button.classList.add("active-nav");
+        } else {
+            button.classList.remove("active-nav");
+        }
+
+        button.addEventListener("click", function () {
+            window.location.href = buttonUrl || "/";
+        });
+    });
+};
+
 document.addEventListener('DOMContentLoaded', function () {
-    const cryptoList = document.getElementById('crypto-list');
-    cryptoList.lastElementChild.style.marginBottom = "20px";
-})
+    let currentPath = window.location.pathname.replace(/^\//, "");
 
-const detail = () => {
-    window.location.href = '/detail';
-}
-
+    addNavigation(currentPath);
+});

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nocturn: Crypto Wallet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body {
+            font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .balance {
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .label {
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        .active-nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
+        }
+    </style>
+    <script src="{{ url_for('static', filename='check-cookie.js') }}"></script>
+    <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
+    <script src="{{ url_for('static', filename='receive.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+
+<body class="bg-[#1B1B1D] min-h-screen flex justify-center items-center">
+    <!-- Main container that centers the mobile view -->
+    <div class="w-full max-w-[400px] pb-20 min-h-screen bg-white relative overflow-y-scroll">
+        <!-- Header -->
+
+        <div class="flex justify-between items-center bg-[#1C1E32] p-4  border-transperent rounded-b-[20px]">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-12 h-12 cursor-pointer bg-white hover:bg-gray-200 rounded-full overflow-hidden flex justify-center items-center">
+                    <div class="w-full h-full flex items-center justify-center text-center  text-2xl font-bold">
+                        <span class="text-center text-[#1C1E32]">J</span>
+                    </div>
+                </div>
+                <span class="text-white font-semibold text-xl">Hello, Jenny!</span>
+            </div>
+            <button class="text-white p-2 bg-gray-100/20 rounded-full hover:bg-gray-100/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Receive Address Content -->
+        <div class="flex flex-col items-center px-4 py-6">
+            <h1 class="text-2xl font-bold text-[#1C1E32] my-4">Receive Address</h1>
+
+            <!-- QR Code -->
+            <div class="bg-white p-4 rounded-lg shadow-lg mb-8">
+                <img src="https://cdn-icons-png.flaticon.com/512/241/241528.png" alt="QR Code" class="w-44 h-44">
+            </div>
+
+            <!-- Address Display -->
+            <div class="w-full px-4">
+                <h2 class="text-xl font-semibold text-[#1C1E32] mb-2 text-center">Your Solana Address</h2>
+                <div class="bg-gray-200 text-black p-4 rounded-tr-lg rounded-tl-lg">
+                    <p class="text-center break-all address">EZhpHTDFQr7v6hZ8t354HdKKZy9ZbdePY2tWa6B48b5n</p>
+                </div>
+                <button
+                    class="copy-seed-phrase w-full py-3 flex justify-center items-center gap-2 border-t-2 border-white hover:border-gray-300 rounded-br-lg rounded-bl-lg hover:bg-gray-300 transition-all bg-gray-200 text-[#1C1E32]"
+                    onclick="copyAddress()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path
+                            d="M13.333 6h-6C6.597 6 6 6.597 6 7.333v6c0 .737.597 1.334 1.333 1.334h6c.737 0 1.334-.597 1.334-1.334v-6c0-.736-.597-1.333-1.334-1.333Z"
+                            stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path
+                            d="M3.333 10h-.666a1.333 1.333 0 0 1-1.334-1.333v-6a1.333 1.333 0 0 1 1.334-1.334h6A1.333 1.333 0 0 1 10 2.667v.666"
+                            stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    Copy
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-[400px] mx-auto">
+            <div class="flex items-center justify-between p-3 px-6 bg-[#1C1E32] text-white">
+                <button class="p-2 px-4 " id="home" data-url="">
+                    <i class="fas fa-home text-2xl"></i>
+                </button>
+
+                <button class="p-2 px-4" id="send" data-url="send">
+                    <i class="fas fa-paper-plane text-2xl"></i>
+                </button>
+
+                <button class="p-2 px-4" id="receive" data-url="receive">
+                    <i class="fas fa-download text-2xl"></i>
+                </button>
+
+                <button class="p-2 px-4" id="history" data-url="history">
+                    <i class="fas fa-history text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,10 +1,11 @@
 from flask import *
 from nocturn import Nocturn, Wallet
 from db import Database
+import env
 
 app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True 
-ETHERSCAN_API_KEY = ''
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY
 
 @app.route('/')
 def home():
@@ -14,6 +15,22 @@ def home():
 def detail():
     return render_template('detail.html')
 
+@app.route('/history')
+def history():
+    return render_template('history.html')
+
+@app.route('/send')
+def send():
+    return render_template('send.html')
+
+@app.route('/receive')
+def receive():
+    return render_template('receive.html')
+
+@app.route('/history-detail')
+def history_detail():
+    return render_template('historyDetail.html')
+
 @app.route('/onboarding')
 def onboarding():
     return render_template('onboarding.html')
@@ -22,15 +39,11 @@ def onboarding():
 def me():
     try:
         session = request.headers.get('Authorization')
-        testnet = not not eval( request.headers.get('Testnet'))
         db = Database()
         wallet = Wallet(ETHERSCAN_API_KEY, private_key=db.get_user(session)['message'][2])
         return {
             'success': True,
             'address': wallet.address,
-            'eth': wallet.fetch_balance('eth', testnet=testnet),
-            'bsc': wallet.fetch_balance('bsc', testnet=testnet),
-            'pol': wallet.fetch_balance('pol', testnet=testnet),
         }
     except Exception as e:
         return {

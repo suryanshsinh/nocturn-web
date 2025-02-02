@@ -1,25 +1,18 @@
-testnet = 0;
-
 if (document.cookie.indexOf("session") >= 0) {
     fetch('/me', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': getCookie('session'),
-            'Testnet': testnet
+            'Authorization': getCookie('session')
         }
     }).then(async res => {
         res = await res.json()
         console.log(res)
-        if (res.message === null) {
-            throw new Error();
-        } else if (res.success === false) {
-            throw new Error();
+        if (res.message === null || res.success === false) {
+            document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+            window.location.href = "/onboarding";
         }
-    }).catch(() => {
-        document.cookie = "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-        window.location.href = "/onboarding";
-    });
+    })
 } else {
     window.location.href = "/onboarding";
 }
