@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.9">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nocturn: Crypto Wallet</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,12 @@
         * {
             scrollbar-width: none;
             -ms-overflow-style: none;
+        }
+
+        .active-nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 1rem;
         }
 
         body {
@@ -54,29 +60,21 @@
     <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
 </head>
 
-<body class="bg-zinc-700 min-h-screen flex justify-center items-start">
-    <div class="w-full max-w-[420px] min-h-screen bg-white relative">
+<body class="bg-[#1B1B1D] min-h-screen flex justify-center items-start">
+    <div class="w-full max-w-[400px] min-h-screen bg-white relative">
         <!-- Header -->
-        <div class="flex justify-between items-center bg-white p-8">
+        <div class="flex  items-center bg-white p-4">
 
             <!-- back button -->
-            <button class="text-[#1C1E32] p-2 bg-gray-400/20  rounded-full" onclick="window.history.back()">
+            <button class="text-[#1C1E32] p-2 bg-gray-400/20  cursor-pointer hover:bg-gray-200 rounded-full"
+                onclick="window.history.back()">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
-            <span class="text-[#1C1E32] font-semibold text-xl ">Etherium (ETH)</span>
-            <!-- setting button -->
-            <button class="text-[#1C1E32] p-2 bg-gray-400/20  rounded-full">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </button>
+            <span class="text-[#1C1E32] mx-auto font-semibold text-xl ">Etherium (ETH)</span>
+
         </div>
 
         <!-- Price Display -->
@@ -103,11 +101,6 @@
                 height="100%">
         </div>
 
-        <!-- Buy/Sell Buttons -->
-        <div class="flex justify-center gap-4 px-6 mt-4">
-            <button class="p-4 w-2/3 bg-[#1C1E32] text-white rounded-full font-medium">Buy</button>
-            <button class="p-4 w-2/3 bg-gray-200 text-[#1C1E32] rounded-full font-medium">Sell</button>
-        </div>
 
         <!-- Market Statistics -->
         <div class="container px-4">
@@ -128,29 +121,41 @@
 
 
         <!-- Bottom Navigation -->
-        <div class="fixed bottom-0 left-0 right-0 max-w-[420px] mx-auto px-6 py-4">
-            <div class="flex items-center justify-between p-3  backdrop-blur bg-[#1C1E32]/70 rounded-[36px]">
-                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+        <div class="fixed bottom-0 left-0 right-0 max-w-[400px] mx-auto ">
+            <div class="flex items-center justify-between p-3 bg-[#1C1E32] ">
+                <button class="p-2 active-nav">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 " fill="white" viewBox="0 0 24 24"
+                        stroke="white">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 4l16 8-16 8 4-8-4-8z" />
+                    </svg>
+
+                </button>
+
+                <button class="p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
                         stroke="white">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 4l16 8-16 8 4-8-4-8z" />
                     </svg>
                 </button>
-                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+
+                <button class="p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
                         stroke="white">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20 4L4 12l16 8-4-8 4-8z" />
+                            d="M4 4l16 8-16 8 4-8-4-8z" />
                     </svg>
+
                 </button>
-                <button class="px-4 py-2 bg-white text-black rounded-full text-2xl">Stats</button>
-                <button class="p-2 bg-white/10 backdrop-blur rounded-full">
+
+                <button class="p-2 ">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
                         stroke="white">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            d="M4 4l16 8-16 8 4-8-4-8z" />
                     </svg>
+
                 </button>
             </div>
         </div>
