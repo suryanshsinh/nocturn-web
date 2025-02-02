@@ -5,13 +5,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nocturn: Crypto Wallet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
+
+        body {
+            font-family: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .balance {
+            font-weight: 600;
+            font-size: 2rem;
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+
+        .label {
+            font-weight: 400;
+            font-size: 1rem;
+        }
     </style>
     <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
 <body class="bg-zinc-700 min-h-screen flex justify-center items-start">
@@ -20,8 +54,7 @@
         <!-- Main content area with purple gradient -->
         <div class="relative bg-[#AB9DFF] border-transperent rounded-b-[60px] ">
             <!-- Top header -->
-            <div
-                class="flex justify-between items-center mb-8 bg-[#1C1E32] p-8 pb-5  border-transperent rounded-b-[36px]">
+            <div class="flex justify-between items-center bg-[#1C1E32] p-8 pb-5  border-transperent rounded-b-[36px]">
                 <div class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
                         <div
@@ -43,9 +76,9 @@
             </div>
 
             <!-- Balance section -->
-            <div class="mb-8 p-12 flex flex-col items-center">
-                <p class="text-black text-md mb-2">Balance in USD</p>
-                <h1 class="text-black text-6xl font-semibold mb-2">$746.95</h1>
+            <div class="p-10 flex flex-col items-center">
+                <p class="text-black text-md mb-2 label font-medium">Balance in USD</p>
+                <h1 class="text-black text-7xl mb-2 balance">$746.<span class="text-4xl bold">95</span></h1>
                 <div class="inline-flex items-center bg-black/80 backdrop-blur rounded-full px-4 py-2">
                     <span class="text-white text-sm">↑ $242.54 (2.93%)</span>
                 </div>
@@ -53,9 +86,9 @@
         </div>
 
         <!-- Crypto actives section -->
-        <div class="p-6 bg-white rounded-t-3xl -mt-4">
+        <div class="p-6 bg-white rounded-t-3xl">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-semibold">Crypto actives</h2>
+                <h2 class="text-3xl label">Crypto activities</h2>
                 <button class="p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -66,9 +99,10 @@
             </div>
 
             <!-- Crypto list -->
-            <div class="space-y-4 overflow-y-scroll max-h-[240px]">
+            <div class="space-y-4 overflow-y-scroll max-h-[35vh]" id="crypto-list">
 
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                <div class="flex cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl"
+                    onclick="detail()">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
                             <span class="text-orange-600 font-bold">₿</span>
@@ -84,7 +118,8 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                <div class="flex cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl"
+                    onclick="detail()">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
                             <span class="text-gray-600 font-bold">Ł</span>
@@ -100,7 +135,8 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                <div class="flex cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl"
+                    onclick="detail()">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center">
                             <span class="text-orange-600 font-bold">₿</span>
@@ -116,7 +152,8 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
+                <div class="flex cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl"
+                    onclick="detail()">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
                             <span class="text-gray-600 font-bold">Ł</span>
@@ -132,23 +169,8 @@
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                            <span class="text-gray-600 font-bold">Ł</span>
-                        </div>
-                        <div>
-                            <p class="font-medium">LTC</p>
-                            <p class="text-sm text-gray-500">Litecoin</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-medium">20,000.85</p>
-                        <p class="text-sm text-gray-500">$10,234.23</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center justify-between p-4 bg-[#F2F2F4]  rounded-2xl">
+                <div class="flex cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl"
+                    onclick="detail()">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                             <span class="text-red-600 font-bold">T</span>
@@ -168,7 +190,7 @@
         </div>
 
         <!-- Bottom navigation -->
-        <div class="fixed bottom-0 left-0 right-0 max-w-[420px] mx-auto bg-white border-t border-gray-100 px-6 py-4">
+        <div class="fixed bottom-0 left-0 right-0 max-w-[90vw] mx-auto  px-6 py-4">
             <div class="flex items-center justify-between p-3 bg-[#1C1E32] border-transperent rounded-[36px]">
                 <button class="p-2 bg-white/10 backdrop-blur rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
