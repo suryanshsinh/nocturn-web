@@ -2,10 +2,14 @@ from flask import *
 from nocturn import Nocturn, Wallet
 from db import Database
 import env
+import qrcode
+import base64
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 ETHERSCAN_API_KEY = env.ETHERSCAN_API_KEY
+COINMARKETCAP_API_KEY = env.COINMARKETCAP_API_KEY
 
 @app.route('/')
 def home():
@@ -22,10 +26,6 @@ def history():
 @app.route('/send')
 def send():
     return render_template('send.html')
-
-@app.route('/receive')
-def receive():
-    return render_template('receive.html')
 
 @app.route('/history-detail')
 def history_detail():
@@ -97,6 +97,72 @@ def create_wallet():
         'success': False,
         'message': res['message']
     }
+
+@app.route('/balance')
+def balance():
+    try:
+        session = request.headers.get('Authorization')
+        testnet = bool(eval(request.headers.get('Testnet')))
+        db = Database()
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=db.get_user(session)['message'][2])
+        eth_balance = wallet.fetch_balance('eth', testnet=testnet) / 10**18
+        bsc_balance = wallet.fetch_balance('bsc', testnet=testnet) / 10**18
+        pol_balance = wallet.fetch_balance('pol', testnet=testnet) / 10**18
+        eth_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, eth_balance, 'eth')
+        bsc_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, bsc_balance, 'bsc')
+        pol_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, pol_balance, 'pol')
+        return {
+            'address': wallet.address,
+            'testnet': testnet,
+            'success': True,
+            'eth_balance': eth_balance,
+            'bsc_balance': bsc_balance,
+            'pol_balance': pol_balance,
+            'eth_balance_usd': eth_balance_usd,
+            'bsc_balance_usd': bsc_balance_usd,
+            'pol_balance_usd': pol_balance_usd
+        }
+    except Exception as e:
+        return {
+            'success': False,
+            'message': f'{e}'
+        }
+
+@app.route('/receive', methods=['GET', 'POST'])
+def receive():
+    if request.method == 'GET':
+        return render_template('receive.html')
+    try:
+        session = request.headers.get('Authorization')
+        db = Database()
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=db.get_user(session)['message'][2])
+        qr_base64 = generate_qr_base64(wallet.address)
+        return {
+            'success': True,
+            'address': wallet.address,
+            'qr': qr_base64
+        }
+    except Exception as e:
+        return {
+            'success': False,
+            'message': f'{e}'
+        }
+
+
+def generate_qr_base64(data):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=7,
+        border=1,
+    )
+    qr.add_data(data)
+    qr.make(fit=True)
+    img = qr.make_image(fill="black", back_color="white")
+    buffered = BytesIO()
+    img.save(buffered, format="PNG")
+    img_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
+    return img_base64
 
 if __name__ == '__main__':
     app.run(debug=True)

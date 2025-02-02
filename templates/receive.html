@@ -61,27 +61,26 @@
     <!-- Main container that centers the mobile view -->
     <div class="w-full max-w-[400px] pb-20 min-h-screen bg-white relative overflow-y-scroll">
         <!-- Header -->
-
-        <div class="flex justify-between items-center bg-[#1C1E32] p-4  border-transperent rounded-b-[20px]">
-            <div class="flex items-center gap-3">
-                <div
-                    class="w-12 h-12 cursor-pointer bg-white hover:bg-gray-200 rounded-full overflow-hidden flex justify-center items-center">
-                    <div class="w-full h-full flex items-center justify-center text-center  text-2xl font-bold">
-                        <span class="text-center text-[#1C1E32]">J</span>
+            <div class="flex justify-between items-center bg-[#1C1E32] p-4  border-transperent rounded-b-[20px]">
+                <div class="flex items-center gap-1 cursor-pointer">
+                    <div
+                        class="w-12 h-12 rounded-full overflow-hidden flex justify-center items-center">
+                        <div class="w-full h-full flex items-center justify-center text-center text-2xl font-bold">
+                            <img class="h-[80%] w-[80%]" src="{{url_for('static', filename='assets/nocturn-mini-white.svg')}}" alt="">
+                        </div>
                     </div>
+                    <span class="text-white font-semibold text-2xl">Nocturn</span>
                 </div>
-                <span class="text-white font-semibold text-xl">Hello, Jenny!</span>
+                <button class="text-white p-2 bg-gray-100/20 rounded-full hover:bg-gray-100/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </button>
             </div>
-            <button class="text-white p-2 bg-gray-100/20 rounded-full hover:bg-gray-100/30">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-            </button>
-        </div>
 
         <!-- Receive Address Content -->
         <div class="flex flex-col items-center px-4 py-6">
@@ -89,14 +88,14 @@
 
             <!-- QR Code -->
             <div class="bg-white p-4 rounded-lg shadow-lg mb-8">
-                <img src="https://cdn-icons-png.flaticon.com/512/241/241528.png" alt="QR Code" class="w-44 h-44">
+                <img class="address-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANkAAADZAQAAAACFxajbAAACB0lEQVR4nN2YPY6kMBSEq9pIJoMbmJu492SmT7bmJuYGJgMJqA2gZzYZRtsTNOxLjF4ln4XfL4Uv7XH7WgPOJ4okSZF1T6qYauBBkryfkPZYNJLUAoCLgVM5NIAkpVPSHosTeQfMODS+vcHm/g6R9fuAfiouVUbXqphcOgfQyyI1VgmAGU8C9JJopQgVGBi4LuXQAJTy+4BeFheSbIHtZZmxSgBJNqekPTLtNlslrxU2w++u9nS039WVEj0JMw4+Pp7e5ZJ1BRMbL5Guo4wGpwjZ8Y1APxFdfBipbzyxlEDHFTa/E+glEasZ4WJYzQgncbbZqaWU3dViZb8KVjNWybcrgC3sL3gVSRleK6wUA6XsImDG6oIZrECVOlJ7mf9oXPorZrAaCMBU94ELq9wHcar65py0x+LQeN5gex/BeWLTtQCqdFLaI9Fm9xAwuY6SVXbiYofrNS43zqi6wIXl0AC3hS4BZrbXG732gTGssNnpOehrthn+Yhms0A2AJ8yI7v5r9xK20tXWFM/O+K+6Aq+tUl7srzw3LtRQw3NzfjTI7wD6gbhtXFTs+4kSQIBRdvGMtEe2mhHw7QqbXQS2lhhGSpd7YPtJDa4LLTW4hMB5qt8M9O9i8fk5NOi4lPDxN2D72p+P9ttqv21cbHYxAKjSM/pPSXtg6/OwSgiSlC46r/D/2eT/Ac77KcpNLE9IAAAAAElFTkSuQmCC" alt="QR Code" class="w-44 h-44">
             </div>
 
             <!-- Address Display -->
             <div class="w-full px-4">
-                <h2 class="text-xl font-semibold text-[#1C1E32] mb-2 text-center">Your Solana Address</h2>
+                <h2 class="text-xl font-semibold text-[#1C1E32] mb-2 text-center">Your multichain wallet address</h2>
                 <div class="bg-gray-200 text-black p-4 rounded-tr-lg rounded-tl-lg">
-                    <p class="text-center break-all address">EZhpHTDFQr7v6hZ8t354HdKKZy9ZbdePY2tWa6B48b5n</p>
+                    <p class="text-center break-all address"></p>
                 </div>
                 <button
                     class="copy-seed-phrase w-full py-3 flex justify-center items-center gap-2 border-t-2 border-white hover:border-gray-300 rounded-br-lg rounded-bl-lg hover:bg-gray-300 transition-all bg-gray-200 text-[#1C1E32]"
