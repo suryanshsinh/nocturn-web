@@ -88,11 +88,13 @@
         </div>
 
         <!-- Time Period Selector -->
-        <div class="flex justify-center gap-5 w-[85%] p-2 rounded-full bg-gray-300 mx-auto">
-            <button class="px-6 py-3 bg-[#1C1E32] text-white rounded-full">24H</button>
-            <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1W</button>
-            <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1M</button>
-            <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1Y</button>
+        <div class="px-4">
+            <div class="flex justify-around p-2  rounded-full bg-gray-200 mx-auto">
+                <button class="px-6 py-3 bg-[#1C1E32] text-white rounded-full">24H</button>
+                <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1W</button>
+                <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1M</button>
+                <button class="px-6 py-3 bg-gray-100 text-gray-600 rounded-full">1Y</button>
+            </div>
         </div>
 
         <!-- Chart Area -->
@@ -103,28 +105,31 @@
 
         <!-- Buy/Sell Buttons -->
         <div class="flex justify-center gap-4 px-6 mt-4">
-            <button class="w-1/3 py-3 bg-[#1C1E32] text-white rounded-full font-medium">Buy</button>
-            <button class="w-1/3 py-3 bg-gray-100 text-gray-600 rounded-full font-medium">Sell</button>
+            <button class="p-4 w-2/3 bg-[#1C1E32] text-white rounded-full font-medium">Buy</button>
+            <button class="p-4 w-2/3 bg-gray-200 text-[#1C1E32] rounded-full font-medium">Sell</button>
         </div>
 
         <!-- Market Statistics -->
-        <div class="p-6 mt-6">
-            <h2 class="text-2xl font-semibold mb-4">Market Statistic</h2>
-            <div class="space-y-4 bg-[#F2F2F4] p-4 rounded-2xl">
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">Market capitalization</span>
-                    <span class="font-medium">$231,233</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">Circulating Suply</span>
-                    <span class="font-medium">114.211 ETH</span>
+        <div class="container px-4">
+            <div class="p-6 mt-6 bg-[#1C1E32] text-white border-transperent rounded-3xl mb-28 ">
+                <h2 class="text-2xl font-semibold mb-4">Market Statistic</h2>
+                <div class="space-y-4 p-4 rounded-2xl mb-42">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-200">Market capitalization</span>
+                        <span class="font-medium">$231,233</span>
+                    </div>
+                    <div class="flex justify-between items-center ">
+                        <span class="text-gray-200">Circulating Suply</span>
+                        <span class="font-medium">114.211 ETH</span>
+                    </div>
                 </div>
             </div>
         </div>
 
+
         <!-- Bottom Navigation -->
         <div class="fixed bottom-0 left-0 right-0 max-w-[420px] mx-auto px-6 py-4">
-            <div class="flex items-center justify-between p-3 bg-[#1C1E32] rounded-[36px]">
+            <div class="flex items-center justify-between p-3  backdrop-blur bg-[#1C1E32]/70 rounded-[36px]">
                 <button class="p-2 bg-white/10 backdrop-blur rounded-full">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
                         stroke="white">
