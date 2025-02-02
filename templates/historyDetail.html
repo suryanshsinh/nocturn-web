@@ -52,7 +52,7 @@
         }
     </style>
     <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
-    <script src="{{ url_for('static', filename='recieve.js') }}"></script>
+    <script src="{{ url_for('static', filename='historyDetail.js') }}"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </head>
 
@@ -60,7 +60,6 @@
     <!-- Main container that centers the mobile view -->
     <div class="w-full max-w-[400px] pb-20 min-h-screen bg-white relative overflow-y-scroll">
         <!-- Header -->
-
         <div class="flex justify-between items-center bg-[#1C1E32] p-4  border-transperent rounded-b-[20px]">
             <div class="flex items-center gap-3">
                 <div
@@ -82,6 +81,16 @@
             </button>
         </div>
 
+        <div id="history-main-info" class="container px-4 justify-center my-8 items-center flex flex-col gap-5">
+            <!-- Major info -->
+        </div>
+
+
+        <div class="container px-4">
+            <div class="mt-3 bg-gray-200 py-1 text-white rounded-3xl">
+                <div class="divide-y divide-white rounded-lg overflow-hidden" id="crypto-info"></div>
+            </div>
+        </div>
 
 
         <!-- Bottom Navigation -->
@@ -95,7 +104,7 @@
                     <i class="fas fa-paper-plane text-2xl"></i>
                 </button>
 
-                <button class="p-2 px-4" id="receive" data-url="recieve">
+                <button class="p-2 px-4" id="receive" data-url="receive">
                     <i class="fas fa-download text-2xl"></i>
                 </button>
 

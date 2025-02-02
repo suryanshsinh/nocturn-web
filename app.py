@@ -19,9 +19,13 @@ def history():
 def send():
     return render_template('send.html')
 
-@app.route('/recieve')
-def recieve():
-    return render_template('recieve.html')
+@app.route('/receive')
+def receive():
+    return render_template('receive.html')
+
+@app.route('/history-detail')
+def history_detail():
+    return render_template('historyDetail.html')
 
 if __name__ == '__main__':
     app.run()

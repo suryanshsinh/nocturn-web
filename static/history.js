@@ -1,5 +1,5 @@
 const historyCard = (crypto, cardContainer) => {
-    cardContainer.innerHTML += ` <div class="flex hover:bg-gray-200 cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl" >
+    cardContainer.innerHTML += ` <div class="flex hover:bg-gray-200 cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl" onclick="window.location.href='/history-detail'"> 
     <div class="flex items center space-x-2">
         <div class="w-12 h-12 bg-[#FEE2E2] rounded-full flex justify-center items-center">
             <i class="fas fa-exchange-alt text-xl text-[#F87171]"></i>

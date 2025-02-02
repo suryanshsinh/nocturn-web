@@ -1,29 +1,40 @@
-const addNavigation = () => {
+const navMappings = {
+    "send": ["send", "send/detail", "send/confirmation"],
+    "receive": ["receive", "receive-detail"],
+    "history": ["history", "history-detail"],
+    "settings": ["settings", "settings/profile"]
+};
+
+const addNavigation = (currentPath) => {
     const navButtons = document.querySelectorAll(".fixed button");
-    const currentPath = window.location.pathname.split("/").pop();
 
     navButtons.forEach(button => {
         const buttonUrl = button.getAttribute("data-url");
 
-        if (currentPath !== buttonUrl) {
-            button.classList.remove("active-nav");
+        let isActive = false;
+
+        if (currentPath === "" && buttonUrl === "") {
+            isActive = true;
         } else {
+            isActive = Object.keys(navMappings).some(key =>
+                buttonUrl === key && navMappings[key].some(path => currentPath.startsWith(path))
+            );
+        }
+
+        if (isActive) {
             button.classList.add("active-nav");
+        } else {
+            button.classList.remove("active-nav");
         }
 
         button.addEventListener("click", function () {
-            if (buttonUrl) {
-                this.classList.add("active-nav");
-                window.location.href = buttonUrl;
-            } else {
-                this.classList.add("active-nav");
-                window.location.href = "/";
-            }
-        })
-
+            window.location.href = buttonUrl || "/";
+        });
     });
-}
+};
 
 document.addEventListener('DOMContentLoaded', function () {
-    addNavigation();
-})
+    let currentPath = window.location.pathname.replace(/^\//, "");
+
+    addNavigation(currentPath);
+});
