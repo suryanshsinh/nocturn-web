@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         * {
             scrollbar-width: none;
@@ -51,7 +52,9 @@
         }
     </style>
     <script src="{{ url_for('static', filename='tailwindcss.js') }}"></script>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </head>
 
 <body class="bg-[#1B1B1D] min-h-screen flex justify-center items-center">
@@ -97,47 +100,28 @@
             <div class="space-y-4" id="crypto-list"></div>
         </div>
 
-        <!-- Bottom navigation -->
-        <div class="fixed bottom-0 left-0 right-0 max-w-[400px] mx-auto ">
-            <div class="flex items-center justify-between p-3 bg-[#1C1E32] ">
-                <button class="p-2 active-nav">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 " fill="white" viewBox="0 0 24 24"
-                        stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4l16 8-16 8 4-8-4-8z" />
-                    </svg>
-
+        <!-- Bottom Navigation -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-[400px] mx-auto">
+            <div class="flex items-center justify-between p-3 px-6 bg-[#1C1E32] text-white">
+                <button class="p-2 px-4 active-nav" id="home" data-url="">
+                    <i class="fas fa-home text-2xl"></i>
                 </button>
 
-                <button class="p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
-                        stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4l16 8-16 8 4-8-4-8z" />
-                    </svg>
+                <button class="p-2 px-4" id="send" data-url="send">
+                    <i class="fas fa-paper-plane text-2xl"></i>
                 </button>
 
-                <button class="p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
-                        stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4l16 8-16 8 4-8-4-8z" />
-                    </svg>
-
+                <button class="p-2 px-4" id="receive" data-url="receive">
+                    <i class="fas fa-download text-2xl"></i>
                 </button>
 
-                <button class="p-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="white" viewBox="0 0 24 24"
-                        stroke="white">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 4l16 8-16 8 4-8-4-8z" />
-                    </svg>
-
+                <button class="p-2 px-4" id="history" data-url="history">
+                    <i class="fas fa-history text-2xl"></i>
                 </button>
             </div>
         </div>
-
     </div>
+
 </body>
 
 </html>
