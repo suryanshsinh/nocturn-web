@@ -83,6 +83,45 @@
         </div>
 
 
+        <div class="p-5 py-12">
+
+            <div class=" rounded-xl mb-4">
+                <label class="text-gray-800 text-sm block mb-2">Recipient's Ethereum address</label>
+                <div class="flex items-center bg-gray-200 p-3 rounded-lg">
+                    <input type="text"
+                        class=" w-min-content bg-transparent flex-1 text-[#1C1E32] outline-none placeholder-gray-500"
+                        placeholder="Recipient's address">
+                </div>
+            </div>
+
+            <div class="rounded-xl mb-4">
+                <label class="text-gray-800 text-sm block mb-2">Amount</label>
+                <div class="flex items-center bg-gray-200 p-3 rounded-lg">
+                    <input type="text"
+                        class="bg-transparent w-1/2 flex-1 text-[#1C1E32] outline-none placeholder-gray-500"
+                        placeholder="Amount">
+                    <select class="bg-transparent text-black border-none outline-none">
+                        <option value="ETH">ETH</option>
+                        <option value="SOL">SOL</option>
+                        <option value="POL">POL</option>
+                        <option value="ONT">ONT</option>
+                    </select>
+
+                    <button class="bg-[#1C1E32] ml-2 text-white text-sm px-3 py-1 rounded-lg">Max</button>
+                </div>
+            </div>
+
+            <div class="flex justify-between text-gray-600 text-sm mb-6">
+                <span>~$0.00 ↕</span>
+                <span>Available -0.00019 ETH</span>
+            </div>
+
+            <div class="flex justify-between">
+                <button class="bg-gray-200 text-[#1C1E32] py-3 px-5 rounded-lg w-1/2 mr-2">Cancel</button>
+                <button class="bg-[#1C1E32] text-white py-3 px-5 rounded-lg w-1/2">Next</button>
+            </div>
+        </div>
+
 
         <!-- Bottom Navigation -->
         <div class="fixed bottom-0 left-0 right-0 max-w-[400px] mx-auto">
