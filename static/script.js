@@ -1,3 +1,5 @@
+testnet = 1
+
 const navMappings = {
     "send": ["send", "send/detail", "send/confirmation"],
     "receive": ["receive", "receive-detail"],
@@ -6,7 +8,7 @@ const navMappings = {
 };
 
 const addNavigation = (currentPath) => {
-    const navButtons = document.querySelectorAll(".fixed button");
+    const navButtons = document.querySelectorAll(".nav-buttons button");
 
     navButtons.forEach(button => {
         const buttonUrl = button.getAttribute("data-url");

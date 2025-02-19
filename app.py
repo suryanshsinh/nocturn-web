@@ -108,9 +108,10 @@ def balance():
         eth_balance = wallet.fetch_balance('eth', testnet=testnet) / 10**18
         bsc_balance = wallet.fetch_balance('bsc', testnet=testnet) / 10**18
         pol_balance = wallet.fetch_balance('pol', testnet=testnet) / 10**18
-        eth_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, eth_balance, 'eth')
-        bsc_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, bsc_balance, 'bsc')
-        pol_balance_usd = Nocturn.to_currency(COINMARKETCAP_API_KEY, pol_balance, 'pol')
+        prices = Nocturn.get_prices(COINMARKETCAP_API_KEY, ['eth', 'bsc', 'pol'])
+        eth_balance_usd = eth_balance * prices['eth']
+        bsc_balance_usd = bsc_balance * prices['bsc']
+        pol_balance_usd = pol_balance * prices['pol']
         return {
             'address': wallet.address,
             'testnet': testnet,
@@ -148,6 +149,113 @@ def receive():
             'message': f'{e}'
         }
 
+@app.route('/token_balance')
+def token_balance():
+    try:
+        session = request.headers.get('Authorization')
+        testnet = bool(eval(request.headers.get('Testnet')))
+        coin = request.args.get('coin')
+        if coin is None or coin.upper() not in ["ETH", "BSC", "POL"]:
+            return {'success': False, 'message': 'Invalid coin parameter'}
+        db = Database()
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=db.get_user(session)['message'][2])
+        balance = wallet.fetch_balance(coin.lower(), testnet=testnet) / 10**18
+        return {'success': True, 'coin': coin.upper(), 'balance': balance}
+    except Exception as e:
+        return {'success': False, 'message': str(e)}
+
+@app.route('/price')
+def price():
+    try:
+        coin = request.args.get('coin', '').lower()
+        if coin not in ['eth', 'bsc', 'pol']:
+            return {'success': False, 'message': 'Invalid coin'}
+        p = Nocturn.get_prices(COINMARKETCAP_API_KEY, [coin])
+        return {'success': True, 'price': p}
+    except Exception as e:
+        return {'success': False, 'message': str(e)}
+
+@app.route('/preview_transaction', methods=['POST'])
+def preview_transaction_route():
+    try:
+        session = request.headers.get('Authorization')
+        testnet = bool(eval(request.headers.get('Testnet')))
+        data = request.get_json()
+        to_address = data.get('to_address')
+        amount = float(data.get('amount'))
+        chain = data.get('chain')
+        if chain not in ["eth", "bsc", "pol"]:
+            raise Exception("Invalid chain.")
+        db = Database()
+        user = db.get_user(session)
+        if not user['success'] or user['message'] is None:
+            raise Exception("User not found.")
+        private_key = user['message'][2]
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=private_key)
+        wei_amount = Nocturn.to_wei(amount)
+        preview = wallet.preview_transaction(to_address, wei_amount, chain, testnet=testnet)
+        preview['success'] = True
+        return preview
+    except Exception as e:
+        return {'success': False, 'message': str(e)}
+
+@app.route('/send_transaction', methods=['POST'])
+def send_transaction():
+    try:
+        session = request.headers.get('Authorization')
+        testnet = bool(eval(request.headers.get('Testnet')))
+        data = request.get_json()
+        to_address = data.get('to_address')
+        amount = float(data.get('amount'))
+        chain = data.get('chain')
+        db = Database()
+        user = db.get_user(session)
+        if not user['success'] or not user['message']:
+            raise Exception("User not found.")
+        if chain not in ["eth", "bsc", "pol"]:
+            raise Exception("Invalid chain.")
+        private_key = user['message'][2]
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=private_key)
+        wei_amount = Nocturn.to_wei(amount)
+        tx_result = wallet.send_crypto(to_address, wei_amount, chain, testnet=testnet)
+        return {'success': True, 'tx_hash': tx_result['tx_hash'], 'message': 'Transaction sent successfully'}
+    except Exception as e:
+        return {'success': False, 'message': str(e)}
+
+@app.route('/transaction_history', methods=['GET'])
+def transaction_history():
+    try:
+        session = request.headers.get('Authorization')
+        chain = request.args.get('chain', 'eth').lower()
+        page = int(request.args.get('page', 1))
+        testnet = bool(eval(request.headers.get('Testnet')))
+        db = Database()
+        user = db.get_user(session)
+        if not user['success'] or not user['message']:
+            raise Exception("User not found.")
+        if chain not in ["eth", "bsc", "pol"]:
+            raise Exception("Invalid chain.")
+        private_key = user['message'][2]
+        wallet = Wallet(ETHERSCAN_API_KEY, private_key=private_key)
+        txs = wallet.get_transaction_history(chain, page=page, testnet=testnet)
+        address = wallet.address.lower()
+        results = []
+        for tx in txs:
+            color = "red" if tx["isError"] == "1" else (
+                "blue" if tx["from"].lower() == address else "green"
+            )
+            value_eth = str(float(tx["value"]) / 1e18)
+            results.append({
+                "hash": tx["hash"],
+                "from": tx["from"],
+                "to": tx["to"],
+                "value": value_eth,
+                "timeStamp": tx["timeStamp"],
+                "color": color
+            })
+        return {"success": True, "transactions": results}
+    except Exception as e:
+        return {"success": False, "message": str(e)}
 
 def generate_qr_base64(data):
     qr = qrcode.QRCode(
