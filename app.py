@@ -15,10 +15,6 @@ COINMARKETCAP_API_KEY = env.COINMARKETCAP_API_KEY
 def home():
     return render_template('home.html')
 
-@app.route('/detail')
-def detail():
-    return render_template('detail.html')
-
 @app.route('/history')
 def history():
     return render_template('history.html')
@@ -26,10 +22,6 @@ def history():
 @app.route('/send')
 def send():
     return render_template('send.html')
-
-@app.route('/history-detail')
-def history_detail():
-    return render_template('historyDetail.html')
 
 @app.route('/onboarding')
 def onboarding():

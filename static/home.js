@@ -1,5 +1,3 @@
-testnet = 1
-
 const renderCryptoList = async () => {
     cryptoData = []
     response = await fetch('/balance', {
@@ -24,7 +22,7 @@ const renderCryptoList = async () => {
     });
     const listContainer = document.getElementById("crypto-list");
     listContainer.innerHTML = cryptoData.map(crypto => `
-        <div class="flex hover:bg-gray-200 cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl" onclick="detail()">
+        <div class="flex hover:bg-gray-200 cursor-pointer items-center justify-between p-4 bg-[#F2F2F4] rounded-2xl">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 ${crypto.bgColor} rounded-full flex items-center justify-center">
                     <span class="${crypto.textColor} font-bold">${crypto.symbol}</span>
@@ -62,10 +60,6 @@ function formatNumber(num) {
         return 0.00;
     }
     return Number(num.toFixed(2));
-}
-
-const detail = () => {
-    window.location.href = '/detail';
 }
 
 document.addEventListener('DOMContentLoaded', function () {

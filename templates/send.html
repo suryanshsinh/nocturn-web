@@ -40,11 +40,15 @@
         </div>
         <span class="text-white font-semibold text-2xl">Nocturn</span>
       </div>
-      <button class="text-white p-2 bg-gray-100/20 rounded-full hover:bg-gray-100/30">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
+      <button id="logoutButton" class="text-white p-2 bg-gray-100/20 rounded-full hover:bg-gray-100/30" title="Logout">
+          <svg fill="white" class="w-8 h-8 p-1.5" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 384.971 384.971" xml:space="preserve">
+              <g>
+                  <g id="Sign_Out">
+                      <path d="M180.455,360.91H24.061V24.061h156.394c6.641,0,12.03-5.39,12.03-12.03s-5.39-12.03-12.03-12.03H12.03C5.39,0.001,0,5.39,0,12.031V372.94c0,6.641,5.39,12.03,12.03,12.03h168.424c6.641,0,12.03-5.39,12.03-12.03C192.485,366.299,187.095,360.91,180.455,360.91z"/>
+                      <path d="M381.481,184.088l-83.009-84.2c-4.704-4.752-12.319-4.74-17.011,0c-4.704,4.74-4.704,12.439,0,17.179l62.558,63.46H96.279c-6.641,0-12.03,5.438-12.03,12.151c0,6.713,5.39,12.151,12.03,12.151h247.74l-62.558,63.46c-4.704,4.752-4.704,12.439,0,17.179c4.704,4.752,12.319,4.752,17.011,0l82.997-84.2C386.113,196.588,386.161,188.756,381.481,184.088z"/>
+                  </g>
+              </g>
+          </svg>
       </button>
     </div>
     <div class="p-5 py-12">
@@ -96,7 +100,7 @@
       <button type="button" id="modalClose" class="absolute top-2 right-2 text-gray-500 text-2xl">&times;</button>
       <h2 class="text-xl font-bold mb-4 text-center">Transaction Preview</h2>
       <div id="modalContent" class="text-sm text-gray-600 space-y-2"></div>
-      <button id="modalConfirm" class="mt-4 bg-[#1C1E32] text-white py-2 px-4 rounded-lg w-full">Confirm Transaction</button>
+      <button id="modalConfirm" class="flex justify-center items-center mt-4 bg-[#1C1E32] text-white py-2 px-4 rounded-lg w-full">Confirm Transaction</button>
     </div>
   </div>
   <script src="{{ url_for('static', filename='send.js') }}"></script>

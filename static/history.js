@@ -92,8 +92,7 @@ function getTxUrl (chain, hash, isTestnet) {
 }
 
 function handleTxClick (tx) {
-  const isTestnet = testnet === 1
-  const explorerUrl = getTxUrl(tx.chain, tx.hash, isTestnet)
+  const explorerUrl = getTxUrl(tx.chain, tx.hash, testnet === 1)
   window.open(explorerUrl, '_blank')
 }
 

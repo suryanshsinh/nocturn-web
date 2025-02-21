@@ -1,4 +1,3 @@
-testnet = 1;
 const currencySelect = document.getElementById("currencySelect");
 const amountInput = document.getElementById("amountInput");
 const availableBalance = document.getElementById("availableBalance");
@@ -12,9 +11,9 @@ const modalConfirm = document.getElementById("modalConfirm");
 
 function showToast(message, err=true) {
   const toast = document.createElement("div");
-  toast.className = `fixed bottom-10 left-1/2 transform -translate-x-1/2 text-white py-2 px-4 rounded shadow-lg z-50 ${err ? "bg-red-500" : "bg-green-500"}`;
+  toast.className = `absolute bottom-24 max-w-[90%] w-full left-1/2 transform -translate-x-1/2 text-white py-2 px-4 rounded shadow-lg z-50 ${err ? "bg-red-500" : "bg-green-500"}`;
   toast.innerText = message;
-  document.body.appendChild(toast);
+  document.body.querySelector('body>div').appendChild(toast);
   setTimeout(() => {
     toast.remove();
   }, 3000);
@@ -37,7 +36,7 @@ function shortAddress(addr) {
 }
 
 async function updateBalance() {
-  availableBalance.innerHTML = `Available - <div class="skeleton-loading rounded-lg absolute inset-0 bg-gray-400 animate-pulse"></div>`;
+  availableBalance.innerHTML = `Available - <div class="skeleton-loading absolute inset-0 bg-gray-400 animate-pulse"></div>`;
   try {
     const coin = currencySelect.value;
     const res = await fetch(`/token_balance?coin=${coin}`, {
@@ -60,7 +59,7 @@ async function updateBalance() {
 }
 
 async function updateUsdEstimation() {
-  usdEstimation.innerHTML = `<div class="skeleton-loading rounded-lg absolute inset-0 bg-gray-400 animate-pulse"></div>`;
+  usdEstimation.innerHTML = `<div class="skeleton-loading absolute inset-0 bg-gray-400 animate-pulse"></div>`;
   try {
     const coin = currencySelect.value.toLowerCase();
     const amountVal = parseFloat(amountInput.value) || 0;
@@ -94,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 500);
   });
   maxButton.addEventListener("click", async () => {
-    availableBalance.innerHTML = `Available - <div class="skeleton-loading rounded-lg absolute inset-0 bg-gray-400 animate-pulse"></div>`;
+    availableBalance.innerHTML = `Available - <div class="skeleton-loading absolute inset-0 bg-gray-400 animate-pulse"></div>`;
     try {
       const coin = currencySelect.value;
       const res = await fetch(`/token_balance?coin=${coin}`, {
@@ -126,8 +125,9 @@ proceedButton.addEventListener("click", async () => {
     return;
   }
   const payload = { to_address: recipient, amount: amountVal, chain: coin.toLowerCase() };
-  modalContent.innerHTML = `<div class="skeleton-loading rounded-lg absolute inset-0 bg-gray-400 animate-pulse"></div>`;
+  modalContent.innerHTML = `<div class="skeleton-loading absolute inset-0 bg-gray-400 animate-pulse"></div>`;
   try {
+    proceedButton.innerHTML = `<svg width="24" fill="white" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_5nOS{transform-origin:center;animation:spinner_sEAn .75s infinite linear}@keyframes spinner_sEAn{100%{transform:rotate(360deg)}}</style><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z" class="spinner_5nOS"/></svg>`
     const res = await fetch("/preview_transaction", {
       method: "POST",
       headers: {
@@ -152,6 +152,7 @@ proceedButton.addEventListener("click", async () => {
       showToast("Error fetching price.");
       return;
     }
+    proceedButton.innerHTML = "Proceed";
     const chainPrice = priceData.price[coin.toLowerCase()];
     const fromWei = (val) => parseFloat(val) / 1e18;
     const chainAmount = fromWei(data.amount_to_send);
@@ -211,6 +212,7 @@ modalConfirm.addEventListener("click", async () => {
     chain: currencySelect.value.toLowerCase()
   }
   try {
+    modalConfirm.innerHTML = `<svg width="24" fill="white" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_5nOS{transform-origin:center;animation:spinner_sEAn .75s infinite linear}@keyframes spinner_sEAn{100%{transform:rotate(360deg)}}</style><path d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z" opacity=".25"/><path d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z" class="spinner_5nOS"/></svg>`
     const res = await fetch("/send_transaction", {
       method: "POST",
       headers: {
@@ -229,4 +231,5 @@ modalConfirm.addEventListener("click", async () => {
   } catch (err) {
     showToast("Error sending transaction.");
   }
+  modalConfirm.innerHTML = "Confirm Transaction";
 });
