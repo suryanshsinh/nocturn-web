@@ -168,9 +168,7 @@ function renderTransactionHistory (linkedList) {
           </div>
           <div>
             <h2 class="font-semibold">${direction} ${displayVal} ${tx.chain.toUpperCase()}</h2>
-            <p class="text-sm text-[#9CA3AF]">${daysAgo} day${
-      daysAgo !== 1 ? 's' : ''
-    } ago</p>
+            <p class="text-sm text-[#9CA3AF]">${daysAgo === 0 ? 'Today' : `${daysAgo} day${daysAgo !== 1 ? 's' : ''} ago`}</p>
           </div>
         </div>
       `
