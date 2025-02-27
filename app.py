@@ -265,4 +265,4 @@ def generate_qr_base64(data):
     return img_base64
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
