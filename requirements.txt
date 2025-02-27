@@ -1,0 +1,4 @@
+nocturn
+flask
+ezenv
+qrcode
