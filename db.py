@@ -77,8 +77,5 @@ class Database:
                 'message': str(e)
             }
 
-if __name__ == '__main__':
-    db = Database()
-    print(db.create_tables())
-    # print(db.insert_user('private_key'))
-    print(db.print_all())
+db = Database()
+db.create_tables()
